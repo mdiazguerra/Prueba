@@ -27,9 +27,9 @@ st.image(image)
 
 # Download button
 @st.cache # IMPORTANT: Cache the conversion to prevent computation on every rerun
-def convert_df(df):
+def convert_df(d):
   return d.to_csv().encode('utf-8')
-st.download_button(label="mycsv",data=convert_df(df), file_name='df.csv', mime='text/csv',)
+st.download_button(label="mycsv",data=convert_df(d), file_name='d.csv', mime='text/csv',)
 
 # Select button
 option = st.selectbox('Column', ['a', 'b', 'c'])
