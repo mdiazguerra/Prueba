@@ -9,7 +9,6 @@ Original file is located at
 
 import sqlite3
 import pandas as pd
-!pip install streamlit
 import streamlit as st
 from PIL import Image
 import numpy as np
