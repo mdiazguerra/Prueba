@@ -36,3 +36,6 @@ option = st.selectbox('Column', ['a', 'b', 'c'])
 
 # Bar chart
 st.bar_chart(d)
+
+# Dataframe
+st.dataframe(d)
