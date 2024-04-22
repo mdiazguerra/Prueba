@@ -35,7 +35,7 @@ st.download_button(label="mycsv",data=convert_df(d), file_name='d.csv', mime='te
 option = st.selectbox('Column', ['a', 'b', 'c'])
 
 # Bar chart
-st.bar_chart(d)
+st.bar_chart(d[option])
 
 # Dataframe
 st.dataframe(d)
