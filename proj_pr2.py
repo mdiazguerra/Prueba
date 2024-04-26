@@ -32,6 +32,7 @@ FROM participants AS
 JOIN projects AS ON organizationID = organizationID
 WHERE country = 'selected_country'
 GROUP BY shortName, name, activityType, organizationURL
+ORDER BY ecContribution desc
 """)
 
 conn.commit()
