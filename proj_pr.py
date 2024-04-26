@@ -21,5 +21,5 @@ country_acronyms = {'Belgium': 'BE', 'Bulgaria': 'BG', 'Czechia': 'CZ', 'Denmark
 'PT','Romania': 'RO', 'Slovenia': 'SI', 'Slovakia': 'SK', 'Finland': 'FI', 'Sweden': 'SE'}
 
 
-c=list(country_acronyms.keys)
+c=list(country_acronyms.keys())
 option = st.selectbox('Countries', c)
