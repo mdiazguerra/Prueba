@@ -30,7 +30,7 @@ SELECT shortName, name, activityType, organizationURL, SUM(ecContribution) AS to
 FROM participants
 WHERE country = option
 GROUP BY shortName, name, activityType, organizationURL
-ORDER BY ecContribution desc
+ORDER BY ecContribution DESC
 """)
 
 conn.commit()
