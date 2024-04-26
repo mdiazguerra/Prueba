@@ -25,8 +25,7 @@ option = st.selectbox('Countries', c)
 
 conn = sqlite3.connect('ecsel_database.db')
 cur=conn.cursor()
-
-cur.execute(organisations = """
+organisations = cur.execute("""
 SELECT shortName, name, activityType, organizationURL, ecContribution) AS total_grants
 FROM participants AS
 JOIN projects AS ON organizationID = organizationID
