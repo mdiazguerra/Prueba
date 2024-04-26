@@ -8,6 +8,7 @@ Original file is located at
 """
 
 import pandas as pd
+import streamlit as st
 countries = pd.read_excel('countries.xlsx')
 
 """For this step, the user will be asked to input a country name, which will be validated within the list of countries, gathered in a dictionary. For testing, the selected country will be Spain (ES)."""
