@@ -8,9 +8,9 @@ Original file is located at
 """
 
 import pandas as pd
+import sqlite3
 import streamlit as st
-countries = pd.read_excel('countries.xlsx')
-
+from PIL import Image
 """For this step, the user will be asked to input a country name, which will be validated within the list of countries, gathered in a dictionary. For testing, the selected country will be Spain (ES)."""
 
 # Country acronyms dictionary
@@ -20,13 +20,6 @@ country_acronyms = {'Belgium': 'BE', 'Bulgaria': 'BG', 'Czechia': 'CZ', 'Denmark
 'Hungary': 'HU', 'Malta': 'MT', 'Netherlands': 'NL', 'Austria': 'AT', 'Poland': 'PL', 'Portugal':
 'PT','Romania': 'RO', 'Slovenia': 'SI', 'Slovakia': 'SK', 'Finland': 'FI', 'Sweden': 'SE'}
 
-name = input('Insert a country name: ')
-while name not in countries['Country'].tolist():
-    name = input('Choose a valid country: ')
 
-for k in country_acronyms.keys():
-  if k == name:
-    print(country_acronyms[name])
-
-c=countries['Country'].tolist()
+c=country_acronyms.keys
 option = st.selectbox('Countries', c)
