@@ -78,8 +78,7 @@ def get_yearly(selected_country):
     contr_plot = pd.merge(df1, df2, on='projectID', how='inner')
     conn.close()
     
-    # Display result
-    print(contr_plot)
+    return contr_plot
 
 
 # This would be the main programme
