@@ -15,6 +15,13 @@ from PIL import Image
 import streamlit as st
 
 
+# Print logo
+image = Image.open('Logo-KDT-JU.webp') # Load the image from disk
+st.image(image)
+
+# Print title
+st.title('Partner search tool')
+
 # This function is expected to connect to the database and access the countries dataframe.
 def get_countries_df():
     conn = sqlite3.connect('ecsel_database.db')
