@@ -13,9 +13,6 @@ from pathlib import Path
 import numpy as np
 from PIL import Image
 import streamlit as st
-import seaborn as sns
-sns.set(style='ticks', color_codes=True)
-import matplotlib.pyplot as plt
 
 
 # This function is expected to connect to the database and access the countries dataframe.
@@ -74,10 +71,8 @@ def get_yearly(selected_country):
     # Merge dataframes on the projectID column
     contr_plot = pd.merge(df1, df2, on='projectID', how='inner')
     conn.close()
-    return   sns.barplot(x=contr_plot.year,y=contr_plot.ecContribution)
-    plt.xticks(rotation=0)
     
-    #return contr_plot
+    return contr_plot
 
 
 # This would be the main programme
@@ -105,9 +100,8 @@ def main():
     # Generate and display Yearly EC contribution of the selected country   
     st.subheader("Yearly EC contribution (€) in " + selected_country)
     plot = get_yearly(selected_country_acronym)
-    print(plot)
     #plot = pd.DataFrame(plot)
-   # st.bar_chart(plot.set_index('year'))
+    st.bar_chart(plot.set_index('year'))
     
     # Generate and display participants dataframe of the selected country
     participants_df = get_participants_df(selected_country_acronym)
