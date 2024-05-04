@@ -81,7 +81,7 @@ def main():
 
     # Generate and display participants dataframe of the selected country
     participants_df = get_participants_df(selected_country_acronym)
-    st.write("Participants DataFrame:")
+    st.title("Participants DataFrame:")
     st.write(participants_df)
 
     # Generate and display project coordinators dataframe of the selected country
