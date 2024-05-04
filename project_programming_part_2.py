@@ -59,13 +59,11 @@ def get_coordinators_df(selected_country):
     conn.close()
     return coordinators_df
 
+# Get access to Yearly EC contribution
+
 # This would be the main programme
 
 def main():
-    #First of all, the logo is printed
-    # Print logo
-    # image = Image.open('Logo-KDT-JU.webp')
-    # st.image(image)
 
     # Using this function you can access the table of countries in order to retrieve the necessary acronyms from the dictionary.
     countries_df = get_countries_df()
@@ -79,6 +77,9 @@ def main():
     selected_country_acronym = country_acronyms[selected_country]
     st.write(f"You selected: {selected_country_acronym} - {selected_country}")
 
+    # Generate and display Yearly EC contribution of the selected country   
+    st.subheader("Yearly EC contribution (€) in" +selected_country)
+    
     # Generate and display participants dataframe of the selected country
     participants_df = get_participants_df(selected_country_acronym)
     st.subheader("Participants DataFrame:")
