@@ -65,9 +65,8 @@ def get_yearly(selected_country):
     query1 = f"""
     SELECT projectID, year
     FROM projects
-    WHERE country = '{selected_country}' 
     """
-    query_df2 = """
+    query2 = """
     SELECT projectID, ecContribution, country
     FROM participants
     WHERE country = '{selected_country}' 
