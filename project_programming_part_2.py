@@ -67,7 +67,7 @@ def get_yearly(selected_country):
     FROM projects
     """
     query2 = """
-    SELECT projectID, ecContribution, country
+    SELECT projectID,  SUM(ecContribution) AS yearly_contribution, country
     FROM participants
     WHERE country = '{selected_country}' 
     """
