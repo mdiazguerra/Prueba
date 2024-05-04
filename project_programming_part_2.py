@@ -81,17 +81,22 @@ def main():
 
     # Generate and display participants dataframe of the selected country
     participants_df = get_participants_df(selected_country_acronym)
-    st.title("Participants DataFrame:")
+    st.subheader("Participants DataFrame:")
     st.write(participants_df)
 
     # Generate and display project coordinators dataframe of the selected country
     coordinators_df = get_coordinators_df(selected_country_acronym)
-    st.write("Project Coordinators DataFrame:")
+    st.subheader("Project Coordinators DataFrame:")
     st.write(coordinators_df)
 
     # Download buttons for generated dataframes
-    st.download_button(label="Download Participants Data", data=participants_df.to_csv(), file_name='participants_data.csv', mime='text/csv')
-    st.download_button(label="Download Coordinators Data", data=coordinators_df.to_csv(), file_name='coordinators_data.csv', mime='text/csv')
+    @st.cache # IMPORTANT: Cache the conversion to prevent computation on every rerun
+    def convert_df(df):
+        return participants_df.to_csv().encode('utf-8')
+        return coordinators_df.to_csv().encode('utf-8')
+   # st.download_button(label="mycsv",data=convert_df(participants_df), file_name='d.csv', mime='text/csv',)
+    st.download_button(label="Download Participants Data", data=convert_df(participants_df), file_name='participants_data.csv', mime='text/csv')
+    st.download_button(label="Download Coordinators Data", data=convert_df(coordinators_df), file_name='coordinators_data.csv', mime='text/csv')
 
 #This code checks if the script is being run directly by the Python interpreter, rather than being imported as a module into another script
 if __name__ == "__main__":
