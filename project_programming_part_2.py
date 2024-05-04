@@ -60,6 +60,28 @@ def get_coordinators_df(selected_country):
     return coordinators_df
 
 # Get access to Yearly EC contribution
+def get_yearly(selected_country):
+    conn = sqlite3.connect('ecsel_database.db')
+    query1 = f"""
+    SELECT projectID, year
+    FROM projects
+    WHERE country = '{selected_country}' 
+    """
+    query_df2 = """
+    SELECT projectID, ecContribution, country
+    FROM participants
+    WHERE country = '{selected_country}' 
+    """
+    df1 = pd.read_sql_query(query1, conn)
+    df2 = pd.read_sql_query(query2, conn)
+    
+    # Merge dataframes on the projectID column
+    contr_plot = pd.merge(df1, df2, on='projectID', how='inner')
+    conn.close()
+    
+    # Display result
+    print(contr_plot)
+
 
 # This would be the main programme
 
@@ -79,6 +101,8 @@ def main():
 
     # Generate and display Yearly EC contribution of the selected country   
     st.subheader("Yearly EC contribution (€) in" +selected_country)
+    plot = get_yearly(selected_country_acronym)
+    st.bar_chart(plot)
     
     # Generate and display participants dataframe of the selected country
     participants_df = get_participants_df(selected_country_acronym)
