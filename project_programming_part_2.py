@@ -74,7 +74,7 @@ def get_yearly(selected_country):
     # Merge dataframes on the projectID column
     contr_plot = pd.merge(df1, df2, on='projectID', how='inner')
     conn.close()
-    return   ax1=sns.barplot(x=contr_plot.year,y=contr_plot.ecContribution)
+    return   sns.barplot(x=contr_plot.year,y=contr_plot.ecContribution)
     plt.xticks(rotation=0)
     
     #return contr_plot
