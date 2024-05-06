@@ -70,11 +70,10 @@ def get_yearly(selected_country):
     
     # Merge dataframes on the projectID column
     contr_plot = pd.merge(df1, df2, on='projectID', how='inner')
-    contr_plot = contr_plot.groupby('year')['ecContribution'].sum()
     conn.close()
     
-    
-    return contr_plot
+    per_country = contr_plot.groupby(['country','year'])['ecContribution'].sum()
+    return per_country
 
 
 # This would be the main programme
