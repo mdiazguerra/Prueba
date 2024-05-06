@@ -54,28 +54,42 @@ def get_coordinators_df(selected_country):
     return coordinators_df
 
 # Get access to Yearly EC contribution
-def get_yearly(selected_country):
-    conn = sqlite3.connect('ecsel_database.db')
-    query1 = f"""
-    SELECT projectID, year
-    FROM projects
-    """
-    query2 = """
-    SELECT projectID, ecContribution, country
-    FROM participants
-    WHERE country = '{selected_country}' 
-    """
-    df1 = pd.read_sql_query(query1, conn)
-    df2 = pd.read_sql_query(query2, conn)
+#def get_yearly(selected_country):
+ #   conn = sqlite3.connect('ecsel_database.db')
+ #    query1 = f"""
+     # SELECT projectID, year
+     # FROM projects
+     # """
+     # query2 = """
+     # SELECT projectID, ecContribution, country
+     # FROM participants
+     # WHERE country = '{selected_country}' 
+     # """
+     # df1 = pd.read_sql_query(query1, conn)
+     # df2 = pd.read_sql_query(query2, conn)
     
     # Merge dataframes on the projectID column
-    contr_plot = pd.merge(df1, df2, on='projectID', how='inner')
+     # contr_plot = pd.merge(df1, df2, on='projectID', how='inner')
+     # conn.close()
+    
+   # per_country = contr_plot.groupby(['country','year'])['ecContribution'].sum()
+   # per_country_selected = per_country[selected_country]
+    
+   # return per_country_selected
+
+def get_yearly(selected_country):
+    conn = sqlite3.connect('ecsel_database.db')
+    query = f"""
+    SELECT p.year, SUM(p.ecContribution) AS total_contribution
+    FROM participants p
+    JOIN projects pr ON p.projectID = pr.projectID
+    WHERE p.country = '{selected_country}'
+    GROUP BY p.year
+    """
+    yearly_data = pd.read_sql_query(query, conn)
     conn.close()
     
-    per_country = contr_plot.groupby(['country','year'])['ecContribution'].sum()
-    per_country_selected = per_country[selected_country]
-    
-    return per_country_selected
+    return yearly_data
 
 # This would be the main programme
 
@@ -103,9 +117,8 @@ def main():
     st.subheader("Yearly EC contribution (€) in " + selected_country)
     plot = get_yearly(selected_country_acronym)
     #plot = pd.DataFrame(plot)
-    #st.bar_chart(plot.set_index('year'))
-    st.bar_chart(plot)
-    
+    #st.bar_chart(plot)
+    st.bar_chart(plot.set_index('year'))
     # Generate and display participants dataframe of the selected country
     participants_df = get_participants_df(selected_country_acronym)
     st.subheader("Participants DataFrame:")
