@@ -122,6 +122,6 @@ def main():
     st.download_button(label="Download Participants Data", data=convert_df(participants_df), file_name='participants_data.csv', mime='text/csv')
     st.download_button(label="Download Coordinators Data", data=convert_df(coordinators_df), file_name='coordinators_data.csv', mime='text/csv')
 
-#This code checks if the script is being run directly by the Python interpreter, rather than being imported as a module into another script
+#This code runs automatically the program
 if __name__ == "__main__":
     main()
