@@ -15,6 +15,29 @@ from PIL import Image
 import streamlit as st
 
 
+def add_logo():
+    st.markdown(
+        """
+        <style>
+            [data-testid="stSidebarNav"] {
+                background-image: url(https://kiutra.com/wp-content/uploads/2021/06/KDT-JU-logo-medium.gif/200/200);
+                background-repeat: no-repeat;
+                padding-top: 120px;
+                background-position: 20px 20px;
+            }
+            [data-testid="stSidebarNav"]::before {
+                content: "My Company Name";
+                margin-left: 20px;
+                margin-top: 20px;
+                font-size: 30px;
+                position: relative;
+                top: 100px;
+            }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
 # This function is expected to connect to the database and access the countries dataframe.
 def get_countries_df():
     conn = sqlite3.connect('ecsel_database.db')
