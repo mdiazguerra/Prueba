@@ -14,47 +14,6 @@ import numpy as np
 from PIL import Image
 import streamlit as st
 
-db_file = 'ecsel_database.db'
-
-#Here, we check whether the database already exists or whether one needs to be created. If it does not exist, create a new one
-
-if not Path(db_file).exists():
-    conn = sqlite3.connect(db_file)
-    projects.to_sql('projects', conn)
-    participants.to_sql('participants', conn)
-    countries.to_sql('countries', conn)
-    df_plot.to_sql('df_plot', conn)
-    conn.close()
-else:
-    print("Database file already exists. Skipping table creation.")
-
-print("Database creation complete.")
-
-
-def add_logo():
-    st.markdown(
-        """
-        <style>
-            [data-testid="stSidebarNav"] {
-                background-image: url(https://kiutra.com/wp-content/uploads/2021/06/KDT-JU-logo-medium.gif/200/200);
-                background-repeat: no-repeat;
-                padding-top: 120px;
-                background-position: 20px 20px;
-            }
-            [data-testid="stSidebarNav"]::before {
-                content: "My Company Name";
-                margin-left: 20px;
-                margin-top: 20px;
-                font-size: 30px;
-                position: relative;
-                top: 100px;
-            }
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-
-
 
 # This function is expected to connect to the database and access the countries dataframe.
 def get_countries_df():
