@@ -102,7 +102,7 @@ def get_yearly(selected_country):
     per_country = contr_plot.groupby(['country','year'])['ecContribution'].sum()
     per_country_selected = per_country[selected_country]
     
-   return per_country_selected
+    return per_country_selected
 
 # This would be the main programme
 
