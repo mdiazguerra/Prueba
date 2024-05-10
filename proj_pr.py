@@ -123,7 +123,8 @@ def main():
     # Generate and display Yearly EC contribution of the selected country   
     st.subheader("Yearly EC contribution (€) in " +selected_country)
     plot = get_yearly(selected_country_acronym)
-    st.bar_chart(plot)
+    #st.bar_chart(plot)
+    st.bar_chart(plott.set_index('year'))
     
     # Generate and display participants dataframe of the selected country
     participants_df = get_participants_df(selected_country_acronym)
