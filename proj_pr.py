@@ -60,7 +60,7 @@ def get_coordinators_df(selected_country):
     return coordinators_df
 
 # Get access to Yearly EC contribution
-def get_yearly(selected_country):
+def get_yearly1(selected_country):
     conn = sqlite3.connect('ecsel_database.db')
     query1 = f"""
     SELECT projectID, year
@@ -80,6 +80,19 @@ def get_yearly(selected_country):
     
     return contr_plot
 
+def get_yearly(selected_country):
+    conn = sqlite3.connect('ecsel_database.db')
+    query = f"""
+    SELECT p.year, SUM(p.ecContribution) AS total_contribution
+    FROM participants p
+    JOIN projects pr ON p.projectID = pr.projectID
+    WHERE p.country = '{selected_country}'
+    GROUP BY p.year
+    """
+    yearly_data = pd.read_sql_query(query, conn)
+    conn.close()
+    
+    return yearly_data
 
 # This would be the main programme
 
