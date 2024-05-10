@@ -80,19 +80,29 @@ def get_yearly1(selected_country):
     
     return contr_plot
 
+# Get access to Yearly EC contribution
 def get_yearly(selected_country):
     conn = sqlite3.connect('ecsel_database.db')
-    query = f"""
-    SELECT p.year, SUM(p.ecContribution) AS total_contribution
-    FROM participants p
-    JOIN projects pr ON p.projectID = pr.projectID
-    WHERE p.country = '{selected_country}'
-    GROUP BY p.year
+    query1 = f"""
+    SELECT projectID, year
+    FROM projects
     """
-    yearly_data = pd.read_sql_query(query, conn)
+    query2 = """
+    SELECT projectID, ecContribution, country
+    FROM participants
+    WHERE country = '{selected_country}' 
+    """
+    df1 = pd.read_sql_query(query1, conn)
+    df2 = pd.read_sql_query(query2, conn)
+    
+    # Merge dataframes on the projectID column
+    contr_plot = pd.merge(df1, df2, on='projectID', how='inner')
     conn.close()
     
-    return yearly_data
+    per_country = contr_plot.groupby(['country','year'])['ecContribution'].sum()
+    per_country_selected = per_country[selected_country]
+    
+   return per_country_selected
 
 # This would be the main programme
 
