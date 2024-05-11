@@ -23,7 +23,6 @@ def get_countries_df():
     return countries_df
 
 #This function is expected to connect to the database and access the participants' dataframe with certain characteristics.
-
 def get_participants_df(selected_country):
     conn = sqlite3.connect('ecsel_database.db')
     query = f"""
