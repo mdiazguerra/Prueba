@@ -66,7 +66,7 @@ def get_yearly(selected_country):
     df1 = pd.read_sql_query(query1, conn)
     df2 = pd.read_sql_query(query2, conn)
 
-#Merge dataframes on the projectID column
+# Merge dataframes on the projectID column
     contr_plot = pd.merge(df1, df2, on='projectID', how='inner')
     conn.close()
     
