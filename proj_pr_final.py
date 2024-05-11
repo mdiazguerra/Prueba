@@ -79,7 +79,7 @@ def get_yearly(selected_country):
 def main():
 
     # Print logo
-    image = Image.open('Logo-KDT-JU.webp') # Load the image from disk
+    image = Image.open('Logo-KDT-JU.webp') # Load the image from repository
     st.image(image)
 
     # Print title
