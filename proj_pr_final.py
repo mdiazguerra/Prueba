@@ -15,13 +15,6 @@ from PIL import Image
 import streamlit as st
 
 
-# Print logo
-image = Image.open('Logo-KDT-JU.webp') # Load the image from disk
-st.image(image)
-
-# Print title
-st.title('Partner search tool')
-
 # This function is expected to connect to the database and access the countries dataframe.
 def get_countries_df():
     conn = sqlite3.connect('ecsel_database.db')
@@ -87,6 +80,13 @@ def get_yearly(selected_country):
 
 def main():
 
+    # Print logo
+    image = Image.open('Logo-KDT-JU.webp') # Load the image from disk
+    st.image(image)
+
+    # Print title
+    st.title('Partner search tool')
+    
     # Using this function you can access the table of countries in order to retrieve the necessary acronyms from the dictionary.
     countries_df = get_countries_df()
     country_acronyms = dict(zip(countries_df['Country'], countries_df['Acronym']))
